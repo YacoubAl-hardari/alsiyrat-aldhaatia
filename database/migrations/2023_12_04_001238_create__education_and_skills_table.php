@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('education_and_skills', function (Blueprint $table) {
             $table->id();
             $table->json('section_title');
-            $table->json('skills');// inside json [title,date,education_title,educationName]
-            $table->json('educations');// inside json [title,date,job_title,compnayName]
+            $table->json('skills');// inside json [date,education_title,educationName]
+            $table->json('educations');// inside json [date,job_title,compnayName]
             $table->json('skill_and_tools');// inside json [title,percentage]
             $table->timestamps();
         });

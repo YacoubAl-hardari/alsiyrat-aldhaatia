@@ -81,102 +81,90 @@
             </div><!--end container-->
         </section>
 
-        
-
 
         <section class="section-md">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="header-title mb-3">Education & Skills</h4>
+                        <h4 class="header-title mb-3">{{ $EducationAndSkill->section_title }}</h4>
                     </div><!--end col-->
                     <div class="col-sm-6 col-print-6">
                         <div class="row">
                             <div class="col-sm-6 col-print-6">
                                 <div class="resume-icon"><i class="uil uil-graduation-hat"></i>
-                                    <h5 class="mt-n2">Education</h5>
+                                    <h5 class="mt-n2">المؤهل العلمي</h5>
                                 </div><!--end resume-icon-->
                                 <div class="timeline">
+                                @if($EducationAndSkill->educations)
+                                @foreach($EducationAndSkill->educations as $data)
+                                @if($data['education_status'] == true)
                                     <div class="time-item">
                                         <div class="item-info">
-                                            <div class="font-14">1998 - 2005</div>
-                                            <h5 class="my-1 text-dark">Highschool</h5>
-                                            <p>Secondary Education</p>
+                                            <div class="font-14">{{ $data['date'] }}</div>
+                                            <h5 class="my-1 text-dark">{{ $data['education_title'] }}</h5>
+                                            <p>{{ $data['education_name'] }}</p>
                                         </div>
-                                    </div><!--end time-item-->
-                                    <div class="time-item mt-3">
-                                        <div class="item-info">
-                                            <div class="font-14">2005 - 2008</div>
-                                            <h5 class="my-1 text-dark">University</h5>
-                                            <p>Bachelor of Computer Applications</p>
-                                        </div>
-                                    </div><!--end time-item-->
-                                    <div class="time-item mt-3">
-                                        <div class="item-info">
-                                            <div class="font-14">2008 - 2010</div>
-                                            <h5 class="my-1 text-dark">Master</h5>
-                                            <p>Master of Science</p>
-                                        </div>
-                                    </div><!--end time-item-->
-                                </div><!--end timeline-->
+                                    </div>
+
+                                    @endif
+                                    @endforeach 
+                                    @endif
+
+                                </div>
+
+                                <!--end timeline-->
                             </div><!--end col-->
+
                             <div class="col-sm-6 col-print-6">
                                 <div class="resume-icon"><i class="uil uil-suitcase-alt"></i>
-                                    <h5 class="mt-n2">Experience</h5>
+                                    <h5 class="mt-n2">الخبرات السابقة</h5>
                                 </div><!--end resume-icon-->
                                 <div class="timeline">
+
+                                       @if($EducationAndSkill->skills)
+                                @foreach($EducationAndSkill->skills as $data)
+                                    @if($data['experience_status'] == true)
                                     <div class="time-item">
                                         <div class="item-info">
-                                            <div class="font-14">2011 - 2013</div>
-                                            <h5 class="my-1 text-dark">Ui/Ux Designer</h5>
-                                            <p>Job Design Company</p>
+                                            <div class="font-14">{{ $data['date'] }}</div>
+                                            <h5 class="my-1 text-dark">{{ $data['experience_job_title'] }}</h5>
+                                            <p>{{ $data['experience_name'] }}</p>
                                         </div>
-                                    </div><!--end time-item-->
-                                    <div class="time-item mt-3">
-                                        <div class="item-info">
-                                            <div class="font-14">2013 - 2015</div>
-                                            <h5 class="my-1 text-dark">Senior Developer</h5>
-                                            <p>Apple Co.</p>
-                                        </div>
-                                    </div><!--end time-item-->
-                                    <div class="time-item mt-3">
-                                        <div class="item-info">
-                                            <div class="font-14">2015 - 2019</div>
-                                            <h5 class="my-1 text-dark">Web Designer - Freelance</h5>
-                                            <p>Mannat-themes</p>
-                                        </div>
-                                    </div><!--end time-item-->
+                                    </div>
+                                    @endif
+
+                                    @endforeach 
+                                    @endif
+                                  
                                 </div><!--end timeline-->
                             </div><!--end col-->
+
                         </div><!--end row-->
                     </div><!--end col-->
                     <div class="col-sm-6 col-print-6 align-self-center">
                         <div class="skills mt-4">
+
+                            @if($EducationAndSkill->skill_and_tools)
+                            @foreach($EducationAndSkill->skill_and_tools as $data)
+                                
                             <div class="skill-box">
-                                <h4 class="skill-title">HTML5 &amp; CSS3</h4>
-                                <div class="progress-line"><span data-percent="78" style="width: 78%;"><span
-                                            class="percent-tooltip">78%</span></span></div>
-                            </div><!--end skill-box-->
-                            <div class="skill-box">
-                                <h4 class="skill-title">Web Design</h4>
-                                <div class="progress-line"><span data-percent="90" style="width: 90%;"><span
-                                            class="percent-tooltip">90%</span></span></div>
-                            </div><!--end skill-box-->
-                            <div class="skill-box">
-                                <h4 class="skill-title">UI/UX Design</h4>
-                                <div class="progress-line"><span data-percent="80" style="width: 80%;"><span
-                                            class="percent-tooltip">80%</span></span></div>
-                            </div><!--end skill-box-->
-                            <div class="skill-box">
-                                <h4 class="skill-title">Photoshop &amp; Ilistletor</h4>
-                                <div class="progress-line"><span data-percent="95" style="width: 95%;"><span
-                                            class="percent-tooltip">95%</span></span></div>
-                            </div><!--end skill-box-->
+                                <h4 class="skill-title">{{ $data['title'] }}</h4>
+                                <div class="progress-line"><span data-percent="{{ $data['percentage'] }}" style="width: {{ $data['percentage'] }}%;"><span
+                                            class="percent-tooltip">{{ $data['percentage'] }}%</span></span></div>
+                            </div>
+
+                                @endforeach 
+                                @endif
+
+                          
+                            
                         </div><!--end skill-->
                     </div><!--end col-->
                 </div><!--end row-->
             </div><!--end container-->
-        </section><!--end section-->
+        </section>
+        
+       
         <section class="bg-funfact section-md">
             <div class="container">
                 <div class="row justify-content-center" id="counter">

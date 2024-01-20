@@ -10,9 +10,15 @@ class EducationAndSkill extends Model
     use HasFactory;
     protected $table = "education_and_skills";
     protected $fillable = [
-        ,'section_title'
+        'section_title'
         ,'skills'
         ,'educations'
         ,'skill_and_tools'
+    ];
+
+    protected $casts = [
+        "skills" => "json",
+        "educations" => "json",
+        "skill_and_tools" => "json",
     ];
 }
