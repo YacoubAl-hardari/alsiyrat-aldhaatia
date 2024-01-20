@@ -4,19 +4,16 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\Review;
+use App\Models\Counter;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Section;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\ReviewResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ReviewResource\RelationManagers;
+use App\Filament\Resources\CounterResource\Pages;
 
-class ReviewResource extends Resource
+class CounterResource extends Resource
 {
-    protected static ?string $model = Review::class;
+    protected static ?string $model = Counter::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,32 +21,22 @@ class ReviewResource extends Resource
     {
         return $form
             ->schema([
-                Section::make("مراجعة العملاء")
-                ->schema(
-                    [
-                        Forms\Components\FileUpload::make('clientImage')
-                    ->required()
+              Section::make()
+              ->schema(
+                [
+                    Forms\Components\TextInput::make('counter_title')
+                    ->required(),
+                Forms\Components\TextInput::make('counter_number')
+                    ->required(),
+                Forms\Components\FileUpload::make('image')
                     ->image()
                     ->avatar()
-                    ->circleCropper()
                     ->imageEditor()
+                    ->circleCropper()
                     ->columnSpanFull()
-                    ,
-
-                Forms\Components\TextInput::make('clientName')
                     ->required(),
-                Forms\Components\TextInput::make('clientJob')
-                    ->required(),
-                Forms\Components\TextInput::make('clientReview')
-                ->columnSpanFull()
-
-                    ->required(),
-                Forms\Components\Toggle::make('status')
-                ->columnSpanFull()
-
-                    ->required(),
-                    ]
-                )->columns(2),
+                ]
+              )->columns(2),
             ]);
     }
 
@@ -57,9 +44,9 @@ class ReviewResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('clientImage')
-                    ->searchable(),
-                Tables\Columns\ToggleColumn::make('status'),
+                Tables\Columns\TextColumn::make('counter_title'),
+                Tables\Columns\TextColumn::make('counter_number'),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -93,10 +80,10 @@ class ReviewResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListReviews::route('/'),
-            'create' => Pages\CreateReview::route('/create'),
-            'view' => Pages\ViewReview::route('/{record}'),
-            'edit' => Pages\EditReview::route('/{record}/edit'),
+            'index' => Pages\ListCounters::route('/'),
+            'create' => Pages\CreateCounter::route('/create'),
+            'view' => Pages\ViewCounter::route('/{record}'),
+            'edit' => Pages\EditCounter::route('/{record}/edit'),
         ];
     }
 }

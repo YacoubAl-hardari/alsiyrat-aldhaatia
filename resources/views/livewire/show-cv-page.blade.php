@@ -168,82 +168,76 @@
         <section class="bg-funfact section-md">
             <div class="container">
                 <div class="row justify-content-center" id="counter">
+                    @if($Counter->count() > 0)
+                    @foreach($Counter as $data)
+                   
                     <div class="col-sm-4 digit-counter">
-                        <div class="media"><i class="uil uil-cell text-warning mr-2 align-self-center"></i>
+                        <div class="media">
+                            <img  width="75" class="text-warning mr-2 align-self-center"  src="{{ asset('storage/'. $data->image) }}" alt="counter icon">
                             <div class="media-body align-self-center">
-                                <h3 class="mb-1"><span class="counter-value" data-count="1500">10</span>+</h3>
-                                <h5 class="counter-name mt-0">Complated Projects</h5>
+                                <h3 class="mb-1"><span class="counter-value" data-count="{{ $data->counter_number }}">0</span>+</h3>
+                                <h5 class="counter-name mt-0">{{ $data->counter_title }}</h5>
                             </div>
                         </div><!--end media-->
                     </div><!--end col-->
-                    <div class="col-sm-4 digit-counter">
-                        <div class="media"><i class="uil uil-smile text-success mr-2 align-self-center"></i>
-                            <div class="media-body align-self-center">
-                                <h3 class="mb-1"><span class="counter-value" data-count="16">1</span>k</h3>
-                                <h5 class="counter-name mt-0">Happy Clients</h5>
-                            </div>
-                        </div><!--end media-->
-                    </div><!--end col-->
-                    <div class="col-sm-4 digit-counter">
-                        <div class="media"><i class="uil uil-trophy text-pink mr-2 align-self-center"></i>
-                            <div class="media-body align-self-center">
-                                <h3 class="mb-1"><span class="counter-value" data-count="21">1</span></h3>
-                                <h5 class="counter-name mt-0">Awards Received</h5>
-                            </div>
-                        </div><!--end media-->
-                    </div><!--end col-->
+                    @endforeach
+
+                    @endif
+                   
+
                 </div><!--end row-->
             </div><!--end container-->
-        </section><!--end section-->
+        </section>
+       
+
+
         <section class="section-md my-work">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="header-title mb-3">My Works & Review</h4>
+                        <h4 class="header-title mb-3">أعمالي ومراجعة العملاء</h4>
                     </div><!--end col-->
                     <div class="col-sm-6 col-print-6 align-self-center">
                         <div class="p-4">
                             <div class="text-center">
-                                <h2><i class="uil uil-feedback text-primary"></i></h2>
+                                {{-- <h2><i class="uil uil-feedback text-primary"></i></h2> --}}
                             </div><!--end /div-->
                             <div id="carouselExampleFade2" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
-                                    <div class="carousel-item">
-                                        <div class="text-center">
-                                            <p class="px-4">It is a long established fact that a reader will be
-                                                distracted by the readable content of a page when looking at its layout.
-                                                The point of using.</p>
-                                            <div><img src="images/users/user-10.jpg" alt=""
-                                                    class="rounded-circle thumb-md mb-2">
-                                                <p class="mb-0 text-primary"><b>- Mary K. Myers</b></p><small
-                                                    class="text-muted">CEO Facebook</small>
-                                            </div>
-                                        </div>
-                                    </div><!--end carousel-item-->
+
+                                    @if($Review->count() > 0)
+
+                                    @foreach($Review as $Review_client)
+                                    @if($Review_client->status == true)
+                                    @if($loop->first)
+
                                     <div class="carousel-item active">
                                         <div class="text-center">
-                                            <p class="px-4">Where does it come from? Contrary to popular belief, Lorem
-                                                Ipsum is not simply random text. It has roots in a piece of classical
-                                                Latin literature from 45 BC.</p>
-                                            <div><img src="images/users/user-4.jpg" alt=""
+                                            <p class="px-4">{{ $Review_client->clientReview }}</p>
+                                            <div><img src="{{ asset("storage/".$Review_client->clientImage) }}" width="50" alt=""
                                                     class="rounded-circle thumb-md mb-2">
-                                                <p class="mb-0 text-primary"><b>- Michael C. Rios</b></p><small
-                                                    class="text-muted">CEO Facebook</small>
+                                                <p class="mb-0 text-primary"><b>{{ $Review_client->clientName }}</b></p><small
+                                                    class="text-muted">{{ $Review_client->clientJob }}</small>
                                             </div>
                                         </div>
-                                    </div><!--end carousel-item-->
+                                    </div>
+                                    @else
                                     <div class="carousel-item">
                                         <div class="text-center">
-                                            <p class="px-4">There are many variations of passages of Lorem Ipsum
-                                                available, but the majority have suffered alteration in some form, by
-                                                injected humour.</p>
-                                            <div><img src="images/users/user-5.jpg" alt=""
+                                            <p class="px-4">{{ $Review_client->clientReview }}</p>
+                                            <div><img src="{{ asset("storage/".$Review_client->clientImage) }}" width="50" alt=""
                                                     class="rounded-circle thumb-md mb-2">
-                                                <p class="mb-0 text-primary"><b>- Lisa D. Pullen</b></p><small
-                                                    class="text-muted">CEO Facebook</small>
+                                                <p class="mb-0 text-primary"><b>{{ $Review_client->clientName }}</b></p><small
+                                                    class="text-muted">{{ $Review_client->clientJob }}</small>
                                             </div>
                                         </div>
-                                    </div><!--end carousel-item-->
+                                    </div>
+                                    @endif
+                                    @endif
+                                    @endforeach
+                                    @endif
+
+
                                 </div><!--end carousel-inner-->
                             </div><!--end carousel-->
                         </div><!--end /div-->
@@ -339,7 +333,10 @@
                     </div><!--end col-->
                 </div><!--end row-->
             </div><!--end container-->
-        </section><!--end section-->
+        </section>
+        
+
+
         <section class="section-md my-clients">
             <div class="container">
                 <div class="row justify-content-between">
