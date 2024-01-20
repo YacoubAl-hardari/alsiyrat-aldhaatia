@@ -17,7 +17,7 @@ return new class extends Migration
             $table->json('name')->nullable();
             $table->json('description')->nullable();
             $table->string('download_cv')->nullable();
-            $table->json('info')->nullable(); // inside info json [name,age,spoken_langages,nationality,interest,years_of_experience]
+            $table->json('info')->nullable(); 
             $table->timestamps();
         });
     }
