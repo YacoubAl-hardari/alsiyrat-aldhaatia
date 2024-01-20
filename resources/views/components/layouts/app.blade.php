@@ -11,12 +11,17 @@
     <!-- App css -->
     <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('front/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        :root{
+            --primary_color:#607d8b;
+        }
+    </style>
     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
-        <div class="container"><a class="navbar-brand" href="#"><i class="uil uil-cell text-primary"></i>يعقوب الحيدري</a>
+        <div class="container"><a class="navbar-brand" href="#">يعقوب الحيدري</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav"
                 aria-expanded="false" aria-label="Toggle navigation"><span
                     class="navbar-toggler-icon"></span></button>

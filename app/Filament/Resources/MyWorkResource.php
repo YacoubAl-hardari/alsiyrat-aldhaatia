@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MyWorkResource\Pages;
-use App\Filament\Resources\MyWorkResource\RelationManagers;
-use App\Models\MyWork;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\MyWork;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\MyWorkResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\MyWorkResource\RelationManagers;
 
 class MyWorkResource extends Resource
 {
@@ -23,18 +24,23 @@ class MyWorkResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
+              Section::make()
+              ->schema([
+                 Forms\Components\Select::make('category_id')
+                    ->relationship('categories', 'name')
+                    ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required(),
                 Forms\Components\TextInput::make('url')
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image()
+                    ->imageEditor()
+                    ->columnSpanFull()
                     ->required(),
                 Forms\Components\Toggle::make('status')
                     ->required(),
+              ])->columns(3),
             ]);
     }
 

@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContactMeResource\Pages;
-use App\Filament\Resources\ContactMeResource\RelationManagers;
-use App\Models\ContactMe;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\ContactMe;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\ContactMeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ContactMeResource\RelationManagers;
 
 class ContactMeResource extends Resource
 {
@@ -23,7 +24,10 @@ class ContactMeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('section_title')
+              Section::make()
+              ->schema(
+                [
+                    Forms\Components\TextInput::make('section_title')
                     ->required(),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
@@ -33,6 +37,8 @@ class ContactMeResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('location')
                     ->required(),
+                ]
+              )->columns(4),
             ]);
     }
 

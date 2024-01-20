@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MyWorkCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MyWork extends Model
 {
@@ -16,4 +17,9 @@ class MyWork extends Model
        , 'image'
        , 'status'
     ];
+
+    public function categories()
+    {
+        return $this->belongsTo(MyWorkCategory::class,'category_id');
+    }
 }

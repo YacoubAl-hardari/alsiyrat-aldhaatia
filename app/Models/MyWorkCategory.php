@@ -13,4 +13,9 @@ class MyWorkCategory extends Model
         'name'
         ,'status'
     ];
+
+    public function my_works()
+    {
+        return $this->hasMany(MyWork::class,'category_id');
+    }
 }

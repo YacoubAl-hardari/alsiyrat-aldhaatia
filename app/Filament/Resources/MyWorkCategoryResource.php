@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MyWorkCategoryResource\Pages;
-use App\Filament\Resources\MyWorkCategoryResource\RelationManagers;
-use App\Models\MyWorkCategory;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\MyWorkCategory;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\MyWorkCategoryResource\Pages;
+use App\Filament\Resources\MyWorkCategoryResource\RelationManagers;
 
 class MyWorkCategoryResource extends Resource
 {
@@ -23,10 +24,13 @@ class MyWorkCategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Section::make()
+                ->schema([
+                    Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\Toggle::make('status')
                     ->required(),
+                ]),
             ]);
     }
 

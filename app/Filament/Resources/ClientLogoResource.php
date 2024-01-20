@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ClientLogoResource\Pages;
-use App\Filament\Resources\ClientLogoResource\RelationManagers;
-use App\Models\ClientLogo;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\ClientLogo;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ClientLogoResource\Pages;
+use App\Filament\Resources\ClientLogoResource\RelationManagers;
 
 class ClientLogoResource extends Resource
 {
@@ -23,15 +24,23 @@ class ClientLogoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')
+                Section::make()
+                ->schema([
+                  Forms\Components\FileUpload::make('image')
                     ->image()
+                    ->imageEditor()
+                    ->columnSpanFull()
                     ->required(),
                 Forms\Components\TextInput::make('url')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\Toggle::make('status')
+                    ->columnSpanFull()
+
                     ->required(),
+                ])
+                ->columns(2),
             ]);
     }
 
