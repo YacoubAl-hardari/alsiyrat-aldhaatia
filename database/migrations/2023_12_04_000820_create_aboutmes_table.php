@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('aboutmes', function (Blueprint $table) {
             $table->id();
-            $table->json('section_title');
-            $table->json('name');
-            $table->json('description');
-            $table->string('download_cv');
-            $table->json('info'); // inside info json [name,age,spoken_langages,nationality,interest,years_of_experience]
+            $table->json('section_title')->nullable();
+            $table->json('name')->nullable();
+            $table->json('description')->nullable();
+            $table->string('download_cv')->nullable();
+            $table->json('info')->nullable(); // inside info json [name,age,spoken_langages,nationality,interest,years_of_experience]
             $table->timestamps();
         });
     }

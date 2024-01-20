@@ -18,4 +18,9 @@ class Header extends Model
         ,'email'
         ,'soicalMedai'
     ];
+
+    protected $casts = [
+        'soicalMedai' => 'array',
+        'i_can_do' => 'array'
+    ];
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('whsatappUrl');
             $table->string('email');
-            $table->string('soicalMedai');//inside the json --> icon - url 
+            $table->json('soicalMedai');//inside the json --> icon - url 
             $table->timestamps();
         });
     }

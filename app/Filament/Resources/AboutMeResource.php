@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AboutMeResource\Pages;
-use App\Filament\Resources\AboutMeResource\RelationManagers;
-use App\Models\AboutMe;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\AboutMe;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\AboutMeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\AboutMeResource\RelationManagers;
 
 class AboutMeResource extends Resource
 {
@@ -23,16 +25,42 @@ class AboutMeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('section_title')
+
+                Section::make()
+                ->schema([
+                    Forms\Components\TextInput::make('section_title')
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('description')
+                    ->columnSpanFull()
                     ->required(),
-                Forms\Components\TextInput::make('download_cv')
+                Forms\Components\FileUpload::make('download_cv')
+                    ->columnSpanFull()
+                    ->downloadable()
                     ->required(),
-                Forms\Components\TextInput::make('info')
-                    ->required(),
+  
+                ])->columns(2),
+                
+                Section::make()
+                ->schema([
+                    Repeater::make('info')
+                    ->schema([
+                            Forms\Components\TextInput::make('label_name')
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('title')
+                                ->required(),
+                        ])
+                        ->columnSpanFull()
+                        ->minItems(1)
+                  ->grid(3)
+                ])->columns(2)
+                ->columnSpanFull(),
+                
+              
+
+                 
             ]);
     }
 

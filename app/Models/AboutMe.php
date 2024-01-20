@@ -16,4 +16,6 @@ class AboutMe extends Model
         ,'download_cv'
         ,'info'
     ];
+
+    protected $casts = ["info"=>"array"];
 }

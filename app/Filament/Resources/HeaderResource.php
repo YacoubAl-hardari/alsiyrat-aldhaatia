@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\HeaderResource\Pages;
-use App\Filament\Resources\HeaderResource\RelationManagers;
-use App\Models\Header;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Header;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\HeaderResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\HeaderResource\RelationManagers;
 
 class HeaderResource extends Resource
 {
@@ -23,28 +25,60 @@ class HeaderResource extends Resource
     {
         return $form
             ->schema([
+              Section::make()
+              ->schema([
+                  Forms\Components\FileUpload::make('image')
+                      ->image()
+                      ->avatar()
+                      ->imageEditor()
+                      ->circleCropper()
+                      ->columnSpanFull()
+                      ->required(),
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('i_can_do')
-                    ->required(),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->required(),
+                    
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TagsInput::make('i_can_do')
+                ->required(),
+
+              ])->columns(2),
+              Section::make()
+              ->schema([
+                    
                 Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('whsatappUrl')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('soicalMedai')
-                    ->required()
-                    ->maxLength(255),
+                ->tel()
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('whsatappUrl')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('email')
+                ->email()
+                ->required()
+                ->maxLength(255),
+        
+               
+                Repeater::make('soicalMedai')
+                ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\FileUpload::make('icon')
+                            ->required(),
+                        Forms\Components\TextInput::make('link')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Toggle::make('status')
+                            ->required(),
+                    ])
+                    ->columnSpanFull()
+                    ->minItems(1)
+              ->grid(3)
+
+                    ->maxItems(7),
+              ])->columns(3)
+              ->columnSpanFull(),
+
             ]);
     }
 
@@ -61,8 +95,17 @@ class HeaderResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('soicalMedai')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('i_can_do')
+                   ->getStateUsing(function (Header $record) {
+                        if ($record->i_can_do) {
+                            $data = [];
+                            foreach ($record->i_can_do as $key => $value) {
+                                $data[] = $value;
+                            }
+                            return $data;
+                        }
+                    }),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

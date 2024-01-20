@@ -1,71 +1,89 @@
 <div>
  
     <div class="main-wraper">
+
         <section class="section bg-profile" id="profile_ripple">
             <div class="zoo-profile">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-print-6 align-self-center mb-3 mb-lg-0">
                             <div class="zoo-profile-main">
-                                <div class="zoo-profile-main-pic"><img src="images/users/user-4.jpg" alt=""
+                                <div class="zoo-profile-main-pic"><img src="{{ asset('storage/'.$Header->image) }}" width="100" alt="my photo"
                                         class="rounded-circle"> <span class="zoo-user-message"><i
                                             class="uil uil-comment-dots"></i></span></div>
                                 <!--end zoo-profile-main-pic-->
                                 <div class="zoo-profile_user-detail">
-                                    <h5 class="zoo-user-name">Rosa Dodson</h5>
-                                    <p class="cd-headline loading-bar"><span class="cd-words-wrapper"><b
-                                                class="is-visible">UI/UX Designer</b> <b>Angular Developer</b> <b>React
-                                                Native Developer</b></span></p>
+                                    <h5 class="zoo-user-name">{{ $Header->name }}</h5>
+                                    <p class="cd-headline loading-bar"><span class="cd-words-wrapper">
+                                        @if($Header->i_can_do)
+                                        @foreach($Header->i_can_do as $title)
+                                        @if($loop->first)
+                                        <b class="is-visible">{{ $title }}</b>
+                                        @else
+                                        <b>{{ $title }}</b>
+                                        @endif
+                                        @endforeach
+                                        
+                                        @endif
+                                     </span></p>
                                 </div><!--end zoo-profile_user-detail-->
                             </div><!--end profile-main-pic-->
                         </div><!--end col-->
                         <div class="col-sm-4 col-print-4 ml-auto">
                             <ul class="list-unstyled personal-detail">
-                                <li><i class="'uil uil-phone-volume mr-2"></i> <b>phone </b>: +91 23456 78910</li>
+                                <li><i class="'uil uil-phone-volume mr-2"></i> <b>phone </b>: {{ $Header->phone }}</li>
                                 <li class="mt-2"><i class="uil uil-envelope mt-2 mr-2"></i> <b>Email </b>:
-                                    mannat.theme@gmail.com</li>
+                                    {{ $Header->email }}</li>
                             </ul><!--end personal-detail-->
                             <ul class="list-inline social-icon mb-0">
-                                <li class="list-inline-item"><a href="#" class="bg-blue"><i
-                                            class="uil uil-facebook-f"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="bg-secondary"><i
-                                            class="uil uil-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="bg-pink"><i
-                                            class="uil uil-dribbble"></i></a></li>
+                                @if($Header->soicalMedai)
+                                @foreach($Header->soicalMedai as $icons)
+                                @if($icons['status'] == true)
+                                @if($icons['link'] !=null)
+                                <li class="list-inline-item"><a href="{{ $icons['link'] }}" target="_blank">
+                                    <img src="{{ asset('storage/'.$icons['icon']) }}" width="25" alt="my photo">
+                                </a></li>
+                                @endif
+                                @endif
+
+                                @endforeach
+                                
+                                @endif
+                               
                             </ul><!--end social-icon-->
                         </div><!--end col-->
                     </div><!--end row-->
                 </div><!--end container-->
             </div><!--end zoo-profile-->
-        </section><!--end section-->
+        </section>
+       
+
+
         <section class="section-md">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="header-title mb-3">About us !</h4>
+                        <h4 class="header-title mb-3">{{ $AboutMe->section_title }}</h4>
                     </div><!--end col-->
                     <div class="col-sm-6 col-print-6">
-                        <h4 class="text-primary font-weight-bold">I'm Rosa Dodson</h4>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                            more-or-less normal distribution of letters, as opposed.</p><button type="button"
-                            class="btn btn-sm btn-soft-primary">Download CV</button>
+                        <h4 class="text-primary font-weight-bold">{{ $AboutMe->name }}</h4>
+                        <p>{{ $AboutMe->description }}</p><a href="{{ asset('storage/'.$AboutMe->download_cv) }}"
+                            class="btn btn-sm btn-soft-primary" download>Download CV</a>
                     </div><!--end col-->
                     <div class="col-sm-5 col-print-5 offset-lg-1 align-self-center">
-                        <p><span class="personal-detail-title">Name</span> <span class="personal-detail-info">Rosa
-                                Dodson</span></p>
-                        <p><span class="personal-detail-title">Date of birth</span> <span
-                                class="personal-detail-info">06 june 1989</span></p>
-                        <p><span class="personal-detail-title">Spoken Langages</span> <span
-                                class="personal-detail-info">English - French - German</span></p>
-                        <p><span class="personal-detail-title">Nationality</span> <span
-                                class="personal-detail-info">USA</span></p>
-                        <p><span class="personal-detail-title">Interest</span> <span class="personal-detail-info">Music,
-                                Reading, journey</span></p>
+                        @if($AboutMe->info )
+                        @foreach($AboutMe->info  as $data)
+                        <p><span class="personal-detail-title">{{ $data['label_name'] }}</span> <span class="personal-detail-info">{{ $data['title'] }}</span></p>
+                        @endforeach
+                                @endif
                     </div><!--end col-->
                 </div><!--end row-->
             </div><!--end container-->
-        </section><!--end section-->
+        </section>
+
+        
+
+
         <section class="section-md">
             <div class="container">
                 <div class="row">
