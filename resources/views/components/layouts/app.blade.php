@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <title>{{ $title ?? 'السيرة الذاتية' }}</title>
     <link rel="shortcut icon" href="images/favicon.ico">
     <link href="{{ asset('front/plugins/filter/magnific-popup.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('front/plugins/animated/headline.css') }}" rel="stylesheet" type="text/css">
