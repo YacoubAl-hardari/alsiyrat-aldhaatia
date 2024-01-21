@@ -18,7 +18,24 @@ class ClientLogoResource extends Resource
 {
     protected static ?string $model = ClientLogo::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+    protected static ?string $modelLabel = 'شعارات العملاء';
+    protected static ?int $navigationSort = 1;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('شعارات العملاء');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('شعارات العملاء');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('العملاء & والعملاء');
+    }
+
 
     public static function form(Form $form): Form
     {

@@ -19,7 +19,23 @@ class HeaderResource extends Resource
 {
     protected static ?string $model = Header::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-check-badge';
+    protected static ?string $modelLabel = 'رأس السيرة الذاتية';
+    protected static ?int $navigationSort = 1;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('رأس السيرة الذاتية');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('رأس السيرة الذاتية');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('بيانتي الشخصية');
+    }
 
     public static function form(Form $form): Form
     {

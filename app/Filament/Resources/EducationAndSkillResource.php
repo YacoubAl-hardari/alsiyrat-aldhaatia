@@ -19,7 +19,25 @@ class EducationAndSkillResource extends Resource
 {
     protected static ?string $model = EducationAndSkill::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
+    
+    protected static ?string $modelLabel = 'المهارات والخبرات';
+    protected static ?int $navigationSort = 3;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('المهارات والخبرات');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('المهارات والخبرات');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('بيانتي الشخصية');
+    }
+
 
     public static function form(Form $form): Form
     {

@@ -18,7 +18,24 @@ class MyWorkResource extends Resource
 {
     protected static ?string $model = MyWork::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-folder-open';
+    protected static ?string $modelLabel = 'المشاريع';
+    protected static ?int $navigationSort = 2;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('المشاريع');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('المشاريع');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('العملاء & والعملاء');
+    }
+
 
     public static function form(Form $form): Form
     {

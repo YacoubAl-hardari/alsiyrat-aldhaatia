@@ -18,7 +18,25 @@ class ContactMeResource extends Resource
 {
     protected static ?string $model = ContactMe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-phone';
+
+    protected static ?string $modelLabel = 'تواصل بي';
+    protected static ?int $navigationSort = 4;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('تواصل بي');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('تواصل بي');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('بيانتي الشخصية');
+    }
+
 
     public static function form(Form $form): Form
     {

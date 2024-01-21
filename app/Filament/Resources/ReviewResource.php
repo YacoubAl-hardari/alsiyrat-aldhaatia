@@ -18,7 +18,24 @@ class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $modelLabel = 'مراجعة العملاء';
+    protected static ?int $navigationSort = 1;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('مراجعة العملاء');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('مراجعة العملاء');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('العملاء & والعملاء');
+    }
+
 
     public static function form(Form $form): Form
     {

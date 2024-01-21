@@ -19,7 +19,24 @@ class AboutMeResource extends Resource
 {
     protected static ?string $model = AboutMe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
+
+    protected static ?string $modelLabel = 'من أنا';
+    protected static ?int $navigationSort = 2;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('من أنا');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('من أنا');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('بيانتي الشخصية');
+    }
 
     public static function form(Form $form): Form
     {

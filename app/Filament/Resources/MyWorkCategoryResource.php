@@ -18,7 +18,26 @@ class MyWorkCategoryResource extends Resource
 {
     protected static ?string $model = MyWorkCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
+
+    protected static ?string $modelLabel = 'أقسام المشاريع';
+    protected static ?int $navigationSort = 1;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('أقسام المشاريع');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('أقسام المشاريع');
+    }
+
+        public static function getNavigationGroup(): ?string
+    {
+        return __('العملاء & والعملاء');
+    }
+
+
 
     public static function form(Form $form): Form
     {

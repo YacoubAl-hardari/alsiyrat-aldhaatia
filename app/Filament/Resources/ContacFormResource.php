@@ -18,6 +18,19 @@ class ContacFormResource extends Resource
     protected static ?string $model = ContacForm::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'نموذج التواصل بي';
+    protected static ?int $navigationSort = 4;
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('نموذج التواصل بي');
+    }
+        public static function getNavigationLabel(): string
+    {
+        return __('نموذج التواصل بي');
+    }
+
+
 
     public static function form(Form $form): Form
     {
