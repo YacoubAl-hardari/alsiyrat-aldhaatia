@@ -17,6 +17,7 @@ class ShowCvPage extends Component
 {
     public function render()
     {
+        // create empty array for store all the models in it.
         $data =[];
         $data["Header"] = Header::first();
         $data["AboutMe"] = AboutMe::first();

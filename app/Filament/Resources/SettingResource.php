@@ -22,7 +22,7 @@ use Filament\Forms\Components\ColorPicker;
 use App\Filament\Resources\SettingResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SettingResource\RelationManagers;
-
+// fix the errors in seeting model 
 class SettingResource extends Resource
 {
     protected static ?string $model = Setting::class;
