@@ -28,6 +28,7 @@ class ShowCvPage extends Component
         $data["MyWork"] = MyWork::latest()->with('categories')->get();
         $data["ClientLogo"] = ClientLogo::latest()->where('status',true)->get();
         $data["ContactMe"] = ContactMe::first();
+        
         return view('livewire.show-cv-page',$data);
     }
 }
